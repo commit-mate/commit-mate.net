@@ -14,7 +14,7 @@
   </div>
 </template>
 
-<style lang="postcss">
+<style>
 /* Customize headers to remove default underline */
 .prose h2 a,
 .prose h3 a {

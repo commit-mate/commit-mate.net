@@ -1,7 +1,9 @@
 <template>
   <div>
-    <h1 class="prose prose-red dark:prose-invert">
-      Hello commit-mate.net
-    </h1>
+    <div class="prose dark:prose-invert">
+      <h1>Github共同開発コミュニティ</h1>
+    </div>
+    <Members />
+    <Prhistory />
   </div>
 </template>
