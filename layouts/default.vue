@@ -5,8 +5,8 @@
   </div>
 </template>
 
-<style lang="postcss">
+<style>
 body {
-  @apply bg-gray-50 dark:bg-gray-900;
+  @apply bg-gray-300 dark:bg-gray-900;
 }
 </style>
