@@ -1,19 +1,17 @@
 <template>
   <div>
     <Html lang="ja" />
-    <div class="section-inner">
-      <slot/>
-    </div>
+    <TheHeader class="the-header"/>
+    <slot/>
+    <TheFooter class="the-footer"/>
   </div>
 </template>
 
-<style>
-body {
+<style scoped>
+/* body {
   @apply bg-gray-300 dark:bg-gray-900;
-}
-.section-inner {
-  margin: auto;
-  width: calc(100% - 6rem);
-  max-width: 600px;
+} */
+.the-header {
+  @apply sticky top-0 z-[99]
 }
 </style>
