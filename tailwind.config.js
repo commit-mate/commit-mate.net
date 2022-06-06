@@ -10,7 +10,7 @@ module.exports = {
     extend: {
       colors: {
         // Customize the feeling of your site
-        gray: colors.stone,
+        gray: colors.slate,
       },
     },
   },
