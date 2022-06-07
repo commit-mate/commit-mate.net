@@ -1,5 +1,5 @@
 <template>
-  <div class="px-4 sm:px-6 py-6">
+  <div class="py-6">
     <div class="text-center">
       <h1 class="py-8">
         <span class="headline">GitHub共同開発でつながる</span>

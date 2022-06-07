@@ -4,7 +4,7 @@
 
 <template>
   <div>
-    <img src="/assets/images/joinstep/step2.jpg" alt="" class="rounded-lg shadow-2xl" />
+    <img src="/assets/images/joinstep/step1.jpg" alt="" class="rounded-lg shadow-2xl" />
   </div>
 </template>
 
