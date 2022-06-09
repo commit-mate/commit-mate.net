@@ -7,9 +7,7 @@
         <span class="block sm:inline">のためのコミュニティ</span>
       </h1>
       <p class="text-slate-700 text-md">
-        <span class="block">GitHub共同開発でつながる</span>
-        <span class="block sm:inline">フロントエンド開発者</span>
-        <span class="block sm:inline">のためのコミュニティ</span>
+        <span class="block">GitHub共同開発でつながるフロントエンド開発者のためのコミュニティ</span>
       </p>
     </div>
   </div>
