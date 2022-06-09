@@ -1,18 +1,13 @@
 <template>
   <div>
 
-    <HomeMain class="max-w-7xl mx-auto"/>
+    <HomeMain class="max-w-7xl mx-auto section-inner"/>
 
     <HomeLine class="my-12"/>
 
-    <Members class="max-w-6xl mx-auto"/>
+    <Members class="max-w-6xl mx-auto section-inner"/>
 
-    <div class="max-w-6xl mx-auto mt-28 pt-12">
-      <div class="flex w-full h-auto items-start">
-        <HomeJoinstepbar class="sticky top-24 basis-1/3"/>
-        <HomeJoinstep class="basis-2/3"/>
-      </div>
-    </div>
+    <HomeJoinstep class="max-w-6xl mx-auto md:mt-12 section-inner"/>
 
   </div>
 </template>

@@ -6,6 +6,7 @@ const props = defineProps({
     bio: String
   }
 })
+
 </script>
 
 <template>
@@ -18,7 +19,7 @@ const props = defineProps({
         <div>
           <img class="w-12 h-12 object-cover rounded-full" :src="`https://github.com/${props.member.id}.png`" alt="">
         </div>
-        <div class="">
+        <div>
           <div class="text-lg text-slate-800 font-bold" v-html="props.member.displayname"></div>
           <div class="text-sm text-slate-500" v-html="props.member.id"></div>
         </div>
