@@ -64,53 +64,61 @@ const contents = [
     `
   },
   {
-    title: 'Commit & Push',
+    title: 'Commit & Push（キャプチャ準備中）',
     sentenceHTML: `
-    <p class="leading-7 text-base">
+    <p class="leading-7 text-base mb-6">
       編集が終わったら、git commit コマンドをします。<br>
-      コミットとは、現在の状態をリポジトリに保存して最新バージョンとする行為です。編集する前のデータは古いバージョンとなります。<br>
-      コミットしたら次に git push コマンドをします。<br>
-      プッシュとは、ローカルリポジトリの最新バージョンを、リモートリポジトリ（GitHub）での最新バージョンとして更新することです。<br>
-      普通はブランチを切って作業しますが、今回はコミュニティ参加のための作業なので、mainブランチのまま作業してプッシュしましょう。
+      コミットとは、現在の状態をリポジトリに最新バージョンとして保存する行為です。編集する前のデータは古いバージョンとなります。
+    </p>
+    <p class="leading-7 text-base">
+      次に git push コマンドをします。<br>
+      プッシュとは、現在までのローカルリポジトリのデータを、リモートリポジトリに送信する行為です。これで新しい作業分がリモートリポジトリに追加され、ローカルと同じ最新版になりました。<br>
+      普通はブランチを切って作業しますが、今回はコミュニティ参加のための作業なので、mainブランチのまま作業して（component/Members.vue 以外は編集せず）プッシュしましょう。
     </p>
     `
   },
   {
-    title: 'Fork 元へ Pull Request を送信',
+    title: 'Fork 元へ Pull request を送信（キャプチャ&手順準備中）',
     sentenceHTML: `
-    `
+    <p class="leading-7 text-base">
+      自分の commit-mate.net リポジトリを開き、「Pull request」のタブへ移動して、プルリクエストを作成します。<br>
+      適当にコメントを添えて送信しましょう。<br>
+      リクエストが承認され、マージされたら参加完了です。
+    </p>`
   },
 ]
 </script>
 
 <template>
-  <div>
+  <div class="pt-24">
 
-    <div class="md:flex md:flex-wrap w-full h-auto justify-center items-start">
+    <h2 class="text-2xl md:text-3xl text-center mb-2">コミュニティ参加方法</h2>
+    <span class="block text-base text-slate-800 text-center mb-0 md:mb-12">手軽に共同開発を体験しよう！</span>
 
-      <div class="md:mr-12 md:basis-5/12 grow-0 shrink-0 sticky top-0 md:top-12 pt-24 z-20">
-        <div class="relative w-full pt-[38%]">
-          <img :src="`/assets/images/joinstep/${currentImg}.jpg`" alt="" class="absolute top-0 left-0 rounded-lg shadow-2xl" />
-        </div>
-      </div>
+    <div class="md:flex md:flex-row-reverse md:flex-wrap w-full h-auto justify-center items-start">
 
-      <div class="md:basis-0 grow pt-12 md:pt-24 z-10">
-        <h2 class="text-2xl -mb-10 md:mb-12">コミュニティ参加方法</h2>
+      <div class="md:basis-0 grow md:pt-12 z-10">
 
         <div 
-          v-for="(content, index) in contents" 
+          v-for="(content, index) in contents"
           :key="index" 
           class="border-gray-200 text-slate-900 pt-20 md:pt-0 md:pb-32"
           :class="(index==1)&&'pt-20'"
           :id="`step-${index+1}`" 
           ref="steps">
 
-          <h3 class="mb-4">
-            <span class="block text-sm">STEP {{index+1}}</span>
-            <span class="block text-xl" v-html="content.title"></span>
+          <h3 class="mb-8">
+            <span class="block text-sm font-bold text-indigo-700 mb-2">STEP {{index+1}}</span>
+            <span class="block text-xl leading-8" v-html="content.title"></span>
           </h3>
           <div v-html="content.sentenceHTML" class="content"></div>
 
+        </div>
+      </div>
+
+      <div class="md:mr-12 md:basis-5/12 grow-0 shrink-0 sticky bottom-6 md:top-48 pt-6 md:pt-12 z-20">
+        <div class="relative w-full pt-[38%]">
+          <img :src="`/assets/images/joinstep/${currentImg}.jpg`" alt="" class="absolute bottom-0 md:bottom-auto md:top-0 left-0 rounded-lg shadow-2xl" />
         </div>
       </div>
 
