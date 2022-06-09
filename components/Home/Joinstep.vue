@@ -43,7 +43,8 @@ const contents = [
       次に、PC（ローカル）に作業用のディレクトリを作成し、コマンドラインツールでクローン <br>
     </p>
     <img src="/assets/images/joinstep/step-2-b.png" alt="" class="rounded-lg shadow-2xl my-3" />
-    <p class="leading-7 text-base">を実行します。これでリモートリポジトリのコピーがローカルに置かれました。<br>
+    <p class="leading-7 text-base">を実行します。<br>
+    これでリモートリポジトリのコピーがローカルに置かれました。<br>
     その後ローカルにて、パッケージをインストールして開発環境を立ち上げます。</p>
     `
   },
@@ -68,7 +69,7 @@ const contents = [
     sentenceHTML: `
     <p class="leading-7 text-base mb-6">
       編集が終わったら、git commit コマンドをします。<br>
-      コミットとは、現在の状態をリポジトリに最新バージョンとして保存する行為です。編集する前のデータは古いバージョンとなります。
+      コミットとは、現在の状態を最新バージョンとしてリポジトリに保存する行為です。編集する前のデータは古いバージョンとなります。
     </p>
     <p class="leading-7 text-base">
       次に git push コマンドをします。<br>
