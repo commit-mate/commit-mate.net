@@ -3,7 +3,7 @@
 
 <template>
   <div class="backdrop-blur bg-white/60">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
       <div class="flex justify-between items-center">
 
         <nuxt-link to="/">
