@@ -43,8 +43,8 @@ const contents = [
       次に、PC（ローカル）に作業用のディレクトリを作成し、コマンドラインツールでクローン <br>
     </p>
     <img src="/assets/images/joinstep/step-2-b.png" alt="" class="rounded-lg shadow-2xl my-3" />
-    <p class="leading-7 text-base">を実行します。これでリモートリポジトリのデータのコピーがローカルに置かれました。<br>
-    その後、パッケージをインストールして開発環境を立ち上げます。</p>
+    <p class="leading-7 text-base">を実行します。これでリモートリポジトリのコピーがローカルに置かれました。<br>
+    その後ローカルにて、パッケージをインストールして開発環境を立ち上げます。</p>
     `
   },
   {
