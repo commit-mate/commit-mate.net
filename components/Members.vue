@@ -2,33 +2,13 @@
 const members = [
   {
     id: 'monsat',
-    displayname: 'Koji',
+    displayname: 'Kohji',
     bio: 'Vue, Nuxtがすきです。'
   },
   {
     id: 'rie-oki-agn',
     displayname: 'Rie',
     bio: 'Vue, Nuxtがすきです。ここにテキスト。ここにテキスト。ここにテキスト。ここにテキスト。'
-  },
-  {
-    id: 'monsat',
-    displayname: 'Koji',
-    bio: 'Vue, Nuxtがすきです。'
-  },
-  {
-    id: 'rie-oki-agn',
-    displayname: 'Rie',
-    bio: 'Vue, Nuxtがすきです。ここにテキスト。ここにテキスト。ここにテキスト。ここにテキスト。'
-  },
-  {
-    id: 'monsat',
-    displayname: 'Koji',
-    bio: 'Vue, Nuxtがすきです。ここにテキスト。ここにテキスト。ここにテキスト。ここにテキスト。'
-  },
-  {
-    id: 'rie-oki-agn',
-    displayname: 'Rie',
-    bio: 'Vue, Nuxtがすきです。'
   },
 ]
 </script>

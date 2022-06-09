@@ -1,13 +1,15 @@
 <template>
   <div class="py-6">
     <div class="text-center">
-      <h1 class="py-8">
-        <span class="headline">GitHub共同開発でつながる</span>
-        <span class="headline">フロントエンド開発者のためのコミュニティ</span>
+      <h1 class="py-8 text-slate-800 text-3xl md:text-4xl leading-[1.5] md:leading-[1.5] tracking-tighter">
+        <span class="block">GitHub共同開発でつながる</span>
+        <span class="block sm:inline">フロントエンド開発者</span>
+        <span class="block sm:inline">のためのコミュニティ</span>
       </h1>
       <p class="text-slate-700 text-md">
-        GitHub共同開発でつながる<br>
-        フロントエンド開発者のためのコミュニティ
+        <span class="block">GitHub共同開発でつながる</span>
+        <span class="block sm:inline">フロントエンド開発者</span>
+        <span class="block sm:inline">のためのコミュニティ</span>
       </p>
     </div>
   </div>
@@ -15,7 +17,4 @@
 
 <style scoped>
 
-.headline {
-  @apply block text-4xl text-slate-800 leading-normal
-}
 </style>
