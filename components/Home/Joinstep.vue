@@ -5,8 +5,8 @@ const currentImg = ref('step-1')
 const options = {
   root: null,
   rootMargin: "0% 0%",
-  threshold: 1.0
-};
+  threshold: 1.0,
+}
 
 const doWhenIntersect = async (entries) => {
   const entry = entries.find(entry => entry.isIntersecting)
@@ -19,8 +19,8 @@ onMounted(() => {
   const snapsteps = unref(steps)
   const observer = new IntersectionObserver(doWhenIntersect, options);
   snapsteps.forEach(target => {
-    observer.observe(target);
-  });
+    observer.observe(target)
+  })
 })
 
 // @TODO: put these doms in an array
@@ -33,7 +33,7 @@ const contents = [
       フォークとは、他のユーザーのリモートリポジトリ（GitHub上のリポジトリ）を、自分のリモートリポジトリとして複製する行為です。<br>
       これをすることで、プルリクエストを送ったりなどの、見知らぬユーザーとの共同開発が可能になります。<br>
       複製したリポジトリ名は同じく「commit-mate.net」で良いでしょう。
-    </p>`
+    </p>`,
   },
   {
     title: 'Fork したリポジトリをローカル環境に Clone する',
@@ -46,7 +46,7 @@ const contents = [
     <p class="leading-7 text-base">を実行します。<br>
     これでリモートリポジトリのコピーがローカルに置かれました。<br>
     その後ローカルにて、パッケージをインストールして開発環境を立ち上げます。</p>
-    `
+    `,
   },
   {
     title: 'Members.vue を編集（仮）',
@@ -62,7 +62,7 @@ const contents = [
     <p class="leading-7 text-base">
       の3つが必須となります。
     </p>
-    `
+    `,
   },
   {
     title: 'Commit & Push（キャプチャ準備中）',
@@ -76,7 +76,7 @@ const contents = [
       プッシュとは、現在までのローカルリポジトリのデータを、リモートリポジトリに送信する行為です。これで新しい作業分がリモートリポジトリに追加され、ローカルと同じ最新版になりました。<br>
       普通はブランチを切って作業しますが、今回はコミュニティ参加のための作業なので、mainブランチのまま作業して（component/Members.vue 以外は編集せず）プッシュしましょう。
     </p>
-    `
+    `,
   },
   {
     title: 'Fork 元へ Pull request を送信（キャプチャ&手順準備中）',
@@ -85,7 +85,7 @@ const contents = [
       自分の commit-mate.net リポジトリを開き、「Pull request」のタブへ移動して、プルリクエストを作成します。<br>
       適当にコメントを添えて送信しましょう。<br>
       リクエストが承認され、マージされたら参加完了です。
-    </p>`
+    </p>`,
   },
 ]
 </script>
@@ -100,26 +100,31 @@ const contents = [
 
       <div class="md:basis-0 grow md:pt-12 z-10">
 
-        <div 
+        <div
           v-for="(content, index) in contents"
-          :key="index" 
+          :key="index"
+          :id="`step-${index + 1}`"
+          ref="steps"
+          :class="{ 'pt-20': index === 1 }"
           class="border-gray-200 text-slate-900 pt-20 md:pt-0 md:pb-32"
-          :class="(index==1)&&'pt-20'"
-          :id="`step-${index+1}`" 
-          ref="steps">
+        >
 
           <h3 class="mb-8">
-            <span class="block text-sm font-bold text-indigo-700 mb-2">STEP {{index+1}}</span>
-            <span class="block text-xl leading-8" v-html="content.title"></span>
+            <span class="block text-sm font-bold text-indigo-700 mb-2">STEP {{ index + 1 }}</span>
+            <span class="block text-xl leading-8" v-html="content.title" />
           </h3>
-          <div v-html="content.sentenceHTML" class="content"></div>
+          <div class="content" v-html="content.sentenceHTML" />
 
         </div>
       </div>
 
       <div class="md:mr-12 md:basis-5/12 grow-0 shrink-0 sticky bottom-6 md:top-48 pt-6 md:pt-12 z-20">
         <div class="relative w-full pt-[38%]">
-          <img :src="`/assets/images/joinstep/${currentImg}.jpg`" alt="" class="absolute bottom-0 md:bottom-auto md:top-0 left-0 rounded-lg shadow-2xl" />
+          <img
+            :src="`/assets/images/joinstep/${currentImg}.jpg`"
+            alt=""
+            class="absolute bottom-0 md:bottom-auto md:top-0 left-0 rounded-lg shadow-2xl"
+          />
         </div>
       </div>
 

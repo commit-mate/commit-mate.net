@@ -1,6 +1,7 @@
-<script setup>
+<script setup lang="ts">
+import type { TeamMember } from '@/types'
 // @TODO: call ↓ from another component
-const members = [
+const members: TeamMember[] = [
   {
     id: 'monsat',
     displayname: 'Kohji',
@@ -12,6 +13,12 @@ const members = [
     bio: 'Vue, Nuxtがすきです。ここにテキスト。ここにテキスト。ここにテキスト。ここにテキスト。'
   },
 ]
+
+// import { pascalCase, kebabCase, camelCase } from 'scule'
+// console.log(pascalCase('rie-oki-agn'))
+// console.log(kebabCase('rie-oki-agn'))
+// console.log(camelCase('rie-oki-agn'))
+
 </script>
 
 <template>
@@ -22,7 +29,7 @@ const members = [
           v-for="member in members"
           :key="member.id"
           :member="member"
-          />
+        />
       </div>
     </div>
   </div>
