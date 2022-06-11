@@ -1,5 +1,5 @@
 <script setup>
-const steps = ref(null)
+const steps = ref(null) // 普通にDOM参照しようとすると最後の要素しか取得されなくて、v-for で回さないと配列にならない仕様らしい（公式より）
 const currentImg = ref('step-1')
 
 const options = {
@@ -23,7 +23,7 @@ onMounted(() => {
   });
 })
 
-
+// @TODO: put these doms in an array
 const contents = [
   {
     title: 'commit mate リポジトリを Fork する',
