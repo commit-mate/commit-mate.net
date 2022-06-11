@@ -108,7 +108,7 @@ const contents = [
           :key="index"
           :id="`step-${index + 1}`"
           ref="steps"
-          :class="{ 'pt-20': index === 1 }"
+          :class="{'pb-24': index === 4}"
           class="border-gray-200 text-slate-900 pt-20 md:pt-0 md:pb-32"
         >
 
