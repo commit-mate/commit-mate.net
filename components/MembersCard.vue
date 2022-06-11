@@ -1,17 +1,17 @@
-<script setup>
-const props = defineProps({
-  member: {
-    id: String,
-    displayname: String,
-    bio: String
-  }
-})
+<script setup lang="ts">
+import type { TeamMember } from '@/types'
+
+type Props = {
+  member: TeamMember
+}
+
+const props = defineProps<Props>()
 
 </script>
 
 <template>
   <div>
-    <a 
+    <a
       :href="`https://github.com/${props.member.id}`" target="_blank" rel="noopener noreferrer"
       class="block bg-slate-50 rounded-md px-6 py-5 drop-shadow">
 

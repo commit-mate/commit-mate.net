@@ -1,6 +1,6 @@
 <template>
   <div>
-    
+
     <NuxtLayout>
       <NuxtPage/>
     </NuxtLayout>
@@ -19,7 +19,7 @@ body * {
   sm:px-12 /** mobile -wide 1column */
   md:px-10 /** tablet 2column */
   lg:px-8 /** pc 3column */
-  xl:px-0 
+  xl:px-0
 }
 
 </style>
