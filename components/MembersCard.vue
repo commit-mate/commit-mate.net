@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { TeamMember } from '@/types'
+import { pascalCase } from 'scule'
 
 type Props = {
   member: TeamMember
@@ -7,10 +8,14 @@ type Props = {
 
 const props = defineProps<Props>()
 
+const nuxtApp = useNuxtApp()
+const component = computed(() => nuxtApp.vueApp.component(pascalCase(props.member.id)))
+
 </script>
 
 <template>
-  <div>
+  <component :is="component" v-if="component" :id="props.member.id"/>
+  <div v-else>
     <a
       :href="`https://github.com/${props.member.id}`" target="_blank" rel="noopener noreferrer"
       class="block bg-slate-50 rounded-md px-6 py-5 drop-shadow">

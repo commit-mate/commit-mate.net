@@ -13,12 +13,6 @@ const members: TeamMember[] = [
     bio: `I'm so struggling with TypeScript. Vue and Nuxt are what I'm living for. Those who believe them shall be saved.`
   },
 ]
-
-// import { pascalCase, kebabCase, camelCase } from 'scule'
-// console.log(pascalCase('rie-oki-agn'))
-// console.log(kebabCase('rie-oki-agn'))
-// console.log(camelCase('rie-oki-agn'))
-
 </script>
 
 <template>
