@@ -69,7 +69,7 @@ const contents = [
     sentenceHTML: `
     <p class="leading-7 text-base mb-6">
       編集が終わったら、git commit コマンドをします。<br>
-      オプション -m でメッセージを書きましょう。<br>
+      オプション -m でメッセージが書けます。できれば英語でメッセージを書いてみましょう。<br>
       コミットとは、現在の状態を最新バージョンとしてリポジトリに保存する行為です。編集する前のデータは古いバージョンとなります。
     </p>
     <p class="leading-7 text-base">
@@ -97,7 +97,7 @@ const contents = [
   <div class="pt-24">
 
     <h2 class="text-2xl md:text-3xl text-center mb-2">コミュニティ参加方法</h2>
-    <span class="block text-base text-slate-800 text-center mb-0 md:mb-12">手軽に共同開発を体験しよう！</span>
+    <span class="block text-base text-slate-800 text-center mb-0 md:mb-12">5ステップで手軽に共同開発を体験しよう！</span>
 
     <div class="md:flex md:flex-row-reverse md:flex-wrap w-full h-auto justify-center items-start">
 

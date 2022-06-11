@@ -5,12 +5,12 @@ const members: TeamMember[] = [
   {
     id: 'monsat',
     displayname: 'Kohji',
-    bio: 'Vue, Nuxtがすきです。'
+    bio: `Front End Engineer I love JavaScript. Of course, I also love TypeScript.`
   },
   {
     id: 'rie-oki-agn',
     displayname: 'Rie',
-    bio: 'Vue, Nuxtがすきです。ここにテキスト。ここにテキスト。ここにテキスト。ここにテキスト。'
+    bio: `I'm so struggling with TypeScript. Vue and Nuxt are what I'm living for. Those who believe them shall be saved.`
   },
 ]
 
