@@ -65,7 +65,7 @@ const contents = [
     `,
   },
   {
-    title: 'Commit & Push（キャプチャ準備中）',
+    title: 'Commit & Push',
     sentenceHTML: `
     <p class="leading-7 text-base mb-6">
       編集が終わったら、git commit コマンドをします。<br>
@@ -80,11 +80,13 @@ const contents = [
     `,
   },
   {
-    title: 'Fork 元へ Pull request を送信（キャプチャ&手順準備中）',
+    title: 'Fork 元へ Pull request を送信',
     sentenceHTML: `
     <p class="leading-7 text-base">
       自分の commit-mate.net リポジトリを開き、「Pull request」のタブへ移動して、プルリクエストを作成します。<br>
-      適当にコメントを添えて送信しましょう。<br>
+      Camparing Changes で、自分のリポジトリのmainとフォーク元のリポジトリのmainを比較していることを確認しましょう。<br>
+      確認できたら、右下の Create Pull Request をクリックします。<br>
+      参加の旨をメッセージで添えて送信します。<br>
       リクエストが承認され、マージされたら参加完了です。
     </p>`,
   },
