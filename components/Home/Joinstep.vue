@@ -65,11 +65,11 @@ const contents = [
     `,
   },
   {
-    title: 'Commit & Push（キャプチャ準備中）',
+    title: 'Commit & Push',
     sentenceHTML: `
     <p class="leading-7 text-base mb-6">
       編集が終わったら、git commit コマンドをします。<br>
-      オプション -m でメッセージを書きましょう。<br>
+      オプション -m でメッセージが書けます。できれば英語でメッセージを書いてみましょう。<br>
       コミットとは、現在の状態を最新バージョンとしてリポジトリに保存する行為です。編集する前のデータは古いバージョンとなります。
     </p>
     <p class="leading-7 text-base">
@@ -80,11 +80,13 @@ const contents = [
     `,
   },
   {
-    title: 'Fork 元へ Pull request を送信（キャプチャ&手順準備中）',
+    title: 'Fork 元へ Pull request を送信',
     sentenceHTML: `
     <p class="leading-7 text-base">
       自分の commit-mate.net リポジトリを開き、「Pull request」のタブへ移動して、プルリクエストを作成します。<br>
-      適当にコメントを添えて送信しましょう。<br>
+      Camparing Changes で、自分のリポジトリのmainとフォーク元のリポジトリのmainを比較していることを確認しましょう。<br>
+      確認できたら、右下の Create Pull Request をクリックします。<br>
+      参加の旨をメッセージで添えて送信します。<br>
       リクエストが承認され、マージされたら参加完了です。
     </p>`,
   },
@@ -95,7 +97,7 @@ const contents = [
   <div class="pt-24">
 
     <h2 class="text-2xl md:text-3xl text-center mb-2">コミュニティ参加方法</h2>
-    <span class="block text-base text-slate-800 text-center mb-0 md:mb-12">手軽に共同開発を体験しよう！</span>
+    <span class="block text-base text-slate-800 text-center mb-0 md:mb-12">5ステップで手軽に共同開発を体験しよう！</span>
 
     <div class="md:flex md:flex-row-reverse md:flex-wrap w-full h-auto justify-center items-start">
 
