@@ -20,12 +20,12 @@
 
         <div class="flex justify-around items-center space-x-6">
 
-          <a href="https://twitter.com/git_commit_mate" class="text-slate-500 text-2xl sm:text-3xl md:text-4xl leading-[1] md:leading-[1] hover:text-sky-500">
+          <nuxt-link href="https://twitter.com/git_commit_mate" class="text-slate-500 text-2xl sm:text-3xl md:text-4xl leading-[1] md:leading-[1] hover:text-sky-500">
             <Icon name="akar-icons:twitter-fill" class="icon"/>
-          </a>
-          <a href="https://github.com/commit-mate/commit-mate.net" class="text-slate-500 text-2xl sm:text-3xl md:text-4xl leading-[1] md:leading-[1] hover:text-stone-700">
+          </nuxt-link>
+          <nuxt-link href="https://github.com/commit-mate/commit-mate.net" class="text-slate-500 text-2xl sm:text-3xl md:text-4xl leading-[1] md:leading-[1] hover:text-stone-700">
             <Icon name="akar-icons:github-fill" class="icon"/>
-          </a>
+          </nuxt-link>
 
         </div>
 
