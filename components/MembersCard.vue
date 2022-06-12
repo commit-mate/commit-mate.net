@@ -16,7 +16,10 @@ const props = defineProps<Props>()
 //   errorComponent: () => import(`./Card/Default.vue`),
 // })
 
+
+// @TODO: don't know the best practice. it works but changing component to global in Nuxt config seems to be not good.
 const customCard:any = resolveComponent(`Card${pascalCase(props.member.id)}`)
+
 </script>
 
 <template>
