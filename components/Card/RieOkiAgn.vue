@@ -1,7 +1,10 @@
-<script setup>
+<script setup lang="ts">
+import type { TeamMember } from '@/types'
 // @TODO my own card
 </script>
 
 <template>
-<div></div>
+  <div>
+    あああああ
+  </div>
 </template>
