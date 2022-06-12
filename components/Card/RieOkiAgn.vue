@@ -20,7 +20,7 @@ const props = defineProps<Props>()
       </div>
       <div>
         <div class="text-lg text-slate-800 font-bold" v-html="props.member.displayname"></div>
-        <div class="text-sm text-slate-500">弟子</div>
+        <div class="text-sm text-slate-500" v-html="props.member.id"></div>
       </div>
     </div>
 
