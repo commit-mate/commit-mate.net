@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import type { TeamMember } from '@/types'
 import { pascalCase } from 'scule'
-import defaultCard from './components/Card/Default.vue'
 
 type Props = {
   member: TeamMember
 }
-
 const props = defineProps<Props>()
 
 // const nuxtApp = useNuxtApp()
@@ -15,7 +13,7 @@ const props = defineProps<Props>()
 
 // const Card = defineAsyncComponent({
 //   loader: () => import(`./Card/${pascalCase(props.member.id)}.vue`),
-//   errorComponent: defaultCard,
+//   errorComponent: () => import(`./Card/Default.vue`),
 // })
 
 const customCard:any = resolveComponent(`Card${pascalCase(props.member.id)}`)

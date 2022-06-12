@@ -10,7 +10,7 @@ const members: TeamMember[] = [
   {
     id: 'rie-oki-agn',
     displayname: 'Rie',
-    bio: `I'm so struggling with TypeScript. Vue and Nuxt are what I'm living for. Those who believe them shall be saved.`
+    bio: `Vue and Nuxt are what I'm living for. Those who believe them shall be 𝓼𝓪𝓿𝓮𝓭.`
   },
 ]
 </script>
