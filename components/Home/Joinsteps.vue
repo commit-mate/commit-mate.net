@@ -38,7 +38,7 @@ onMounted(() => {
 
     <div class="md:flex md:flex-row-reverse md:flex-wrap w-full h-auto justify-center items-start">
 
-      <div class="md:basis-0 grow md:pt-12 z-10">
+      <div class="md:basis-0 grow md:pt-12 z-10 prose">
 
         <div
           v-for="(doc, index) of data"
@@ -46,7 +46,7 @@ onMounted(() => {
           :data-number="index"
           :id="`step-${index + 1}`"
           :class="{ 'pb-24': index === 4 }"
-          class="content border-gray-200 text-slate-900 pt-24 md:pt-0 md:pb-36"
+          class="border-gray-200 text-slate-900 pt-24 md:pt-0 md:pb-36"
           ref="steps">
 
           <h3 class="mb-8">
@@ -54,7 +54,7 @@ onMounted(() => {
             <span class="block text-xl leading-8" v-html="doc.stepTitle" />
           </h3>
 
-          <ContentRenderer :value="doc" />
+          <ContentRenderer :value="doc" class="prose"/>
         </div>
 
       </div>
@@ -89,10 +89,7 @@ onMounted(() => {
   </div>
 </template>
 
-<style>
-.content p {
-  @apply leading-loose mb-4
-}
+<style scoped>
 
 .flexible {
   transition: all 1s ease;
@@ -110,5 +107,21 @@ onMounted(() => {
 .flexible-full.half {
   width: 50%;
   transition: all 1s ease;
+}
+
+/* @TODO: コマンドラインのインラインで擬似要素として$を置く */
+:deep(code) {
+  @apply
+  mx-1
+  px-3
+  py-1
+  bg-neutral-200
+  rounded-md
+}
+
+:deep(a) {
+  @apply
+  underline
+  text-indigo-700
 }
 </style>
