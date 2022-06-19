@@ -7,7 +7,7 @@
 
     <Members class="max-w-6xl mx-auto section-inner"/>
 
-    <HomeJoinstep class="max-w-6xl mx-auto md:mt-12 section-inner"/>
+    <HomeJoinsteps class="max-w-6xl mx-auto md:mt-12 section-inner"/>
 
   </div>
 </template>
