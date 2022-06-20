@@ -115,7 +115,6 @@ onMounted(() => {
   mx-1
   px-3
   py-1
-  bg-neutral-200
   rounded-md
 }
 
