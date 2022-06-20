@@ -1,8 +1,14 @@
 <script setup>
-const { data } = await useAsyncData('page-data', () => queryContent('/joinsteps').find())
+const data = await queryContent('joinsteps').find()
+const imageData = await queryContent('joinsteps').only(['images']).find()
 const steps = ref(null)
-const currentImgs = ref(['step-1'])
+const currentNumber = ref(0)
+const currentImgs = computed(() => imageData[currentNumber.value].images)
 const half = ref(false)
+// SSR mode only
+// const generateImgPath = (fileName) => {
+//   return new URL(`../assets/images/joinstep/${fileName}.jpg`, 'http://localhost:3000/').href
+// }
 
 const options = {
   root: null,
@@ -12,12 +18,10 @@ const options = {
 
 const doWhenIntersect = async (entries) => {
   const entry = entries.find(entry => entry.isIntersecting)
-  if (entry && (entry !== currentImgs.value)) {
-    currentImgs.value = data.value[entry.target.dataset.number].image
+  if (entry) {
+    currentNumber.value = entry.target.dataset.number
     if (currentImgs.value[1]) {
-      setTimeout(() => {
-        half.value = true
-      }, 300);
+      half.value = true
     } else {
       half.value = false
     }
@@ -31,6 +35,7 @@ onMounted(() => {
     observer.observe(target)
   })
 })
+
 
 </script>
 <template>
@@ -55,6 +60,7 @@ onMounted(() => {
           </h3>
 
           <ContentRenderer :value="doc" class="prose"/>
+
         </div>
 
       </div>
@@ -62,27 +68,31 @@ onMounted(() => {
       <div class="md:mr-12 md:basis-6/12 grow-0 shrink-0 sticky bottom-6 md:top-48 pt-6 md:pt-12 z-20">
 
         <div class="relative w-full pt-[56.25%] flex bg-zinc-900 rounded-lg shadow-2xl overflow-hidden">
-          <div class="absolute top-0 left-0 w-full h-full">
+
+          <div
+            v-for="(images, index) in imageData"
+            :key="index"
+            :data-number="index"
+            class="absolute top-0 left-0 w-full h-full"
+            :class="{'z-1': index == currentNumber, 'z-10': index == currentNumber}"
+            >
 
             <img
-              :src="`/assets/images/joinstep/${currentImgs[0]}.jpg`"
-              alt=""
-              class="flexible-full inline-block w-[100%] h-full object-cover"
-              :class="{'half': (half && currentImgs[1])}"
+              v-for="(imageName, index) in images['images']"
+              :key="index"
+              :src="`../assets/images/joinstep/${imageName}.jpg`"
+              :alt="imageName"
+              class="flexible inline-block h-full object-cover"
+              :class="{'w-[100%]': index === 0, 'w-[0%]': index === 1, 'half': (half && currentImgs[1])}"
             />
 
-            <img
-              v-show="currentImgs[1]"
-              :src="`/assets/images/joinstep/${currentImgs[1]}.jpg`"
-              alt=""
-              class="flexible inline-block w-[0%] h-full object-cover"
-              :class="{'half': (half && currentImgs[1])}"
-            />
 
           </div>
+
         </div>
 
       </div>
+
 
     </div>
 
@@ -94,20 +104,11 @@ onMounted(() => {
 .flexible {
   transition: all 1s ease;
 }
-
-.flexible-full {
-  transition: all 1s ease;
-}
-
 .flexible.half {
   width: 50%;
   transition: all 1s ease;
 }
 
-.flexible-full.half {
-  width: 50%;
-  transition: all 1s ease;
-}
 
 /* @TODO: コマンドラインのインラインで擬似要素として$を置く */
 :deep(code) {
