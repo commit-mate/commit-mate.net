@@ -20,8 +20,6 @@ const doWhenIntersect = async (entries) => {
   const entry = entries.find(entry => entry.isIntersecting)
   if (entry) {
     currentNumber.value = entry.target.dataset.number
-    console.log(currentNumber.value)
-    console.log(entry.target.dataset.number)
     if (currentImgs.value[1]) {
       half.value = true
     } else {
