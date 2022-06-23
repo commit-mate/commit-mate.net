@@ -30,7 +30,7 @@ const members: TeamMember[] = [
   {
     id: 'sudo-roa',
     displayname: 'roa',
-    bio: 'Ph.D.student of Information Science. I'm looking forward to developing with you'
+    bio: `Ph.D.student of Information Science. I'm looking forward to developing with you`
   },
 ]
 </script>
