@@ -17,7 +17,11 @@ const members: TeamMember[] = [
     displayname: 'Tenpei',
     bio: `I'm a beginner of Engineer. I want to learn Laravel Nuxt Flutter`
   },
-
+  {
+    id: 'kuritahisami',
+    displayname: 'Kurichan',
+    bio: `I'm a FrontEnd Engineer who loves web and animation`
+  },
 ]
 </script>
 
