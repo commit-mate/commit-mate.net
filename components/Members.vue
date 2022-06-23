@@ -22,6 +22,11 @@ const members: TeamMember[] = [
     displayname: 'Kurichan',
     bio: `I'm a FrontEnd Engineer who loves web and animation`
   },
+  {
+    id: 'masaya0521',
+    displayname: 'Masaya',
+    bio: `I'm a FrontEnd Engineer. I want to learn Nuxt, GraphQL, golang and Kubernetes `
+  },
 ]
 </script>
 
