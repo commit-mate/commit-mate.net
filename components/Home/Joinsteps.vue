@@ -13,7 +13,7 @@ const half = ref(false)
 const options = {
   root: null,
   rootMargin: "0% 0%",
-  threshold: 1.0,
+  threshold: 0.7,
 }
 
 const doWhenIntersect = async (entries) => {
