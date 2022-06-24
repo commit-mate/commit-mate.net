@@ -12,6 +12,26 @@ const members: TeamMember[] = [
     displayname: 'Rie',
     bio: `Vue and Nuxt are what I'm living for. Those who believe them shall be 𝓼𝓪𝓿𝓮𝓭.`
   },
+  {
+    id: 'tenpei-peso',
+    displayname: 'Tenpei',
+    bio: `I'm a beginner of Engineer. I want to learn Laravel Nuxt Flutter`
+  },
+  {
+    id: 'hisamikurita',
+    displayname: 'Kurichan',
+    bio: `I'm a FrontEnd Engineer who loves web and animation`
+  },
+  {
+    id: 'masaya0521',
+    displayname: 'Masaya',
+    bio: `I'm a FrontEnd Engineer. I want to learn Nuxt, GraphQL, golang and Kubernetes `
+  },
+  {
+    id: 'sudo-roa',
+    displayname: 'roa',
+    bio: `Ph.D.student of Information Science. I'm looking forward to developing with you`
+  },
 ]
 </script>
 
