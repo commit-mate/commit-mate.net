@@ -37,6 +37,11 @@ const members: TeamMember[] = [
     displayname: 'Azusa Okamoto',
     bio: `Frontend Developer in Hyogo. I usually use TypeScript and React. I'm interested in PHP, Express and Docker. Glad to study with you all.`
   },
+  {
+    id: 'sa-ji',
+    displayname: 'sa-ji',
+    bio: `I'm an automotive software engineer. I wish to learn the process of the front-end web developments.`
+  },
 ]
 </script>
 
