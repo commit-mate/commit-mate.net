@@ -16,24 +16,22 @@ const options = {
   threshold: 0.7,
 }
 
-const doWhenIntersect: IntersectionObserverCallback = async (entries) => {
-  const entry = entries.find(entry => entry.isIntersecting)
-  if (entry) {
-    currentNumber.value = Number(entry.target.getAttribute('data-number'))
-    if (currentImgs.value[1]) {
-      half.value = true
-    } else {
-      half.value = false
+onMounted(() => {
+  const doWhenIntersect: IntersectionObserverCallback = async (entries) => {
+    const entry = entries.find(entry => entry.isIntersecting)
+    if (entry) {
+      currentNumber.value = Number(entry.target.getAttribute('data-number'))
+      if (currentImgs.value[1]) {
+        half.value = true
+      } else {
+        half.value = false
+      }
     }
   }
-}
 
-onMounted(() => {
   const snapsteps = unref(steps)
   const observer = new IntersectionObserver(doWhenIntersect, options);
-  snapsteps.forEach(target => {
-    observer.observe(target)
-  })
+  snapsteps.map(target => observer.observe(target))
 })
 
 
