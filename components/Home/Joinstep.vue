@@ -30,7 +30,7 @@ const contents = [
     sentenceHTML: `
     <p class="leading-7 text-base">
       まずは <a href="https://github.com/commit-mate/commit-mate.net">commit-mate.net リポジトリ</a> をフォークします。<br>
-      フォークとは、他のユーザーのリモートリポジトリ（GitHub上のリポジトリ）を、自分のリモートリポジトリとして複製する行為です。<br>
+      フォークとは、他のユーザーのGitHubリポジトリを、自分のアカウントに複製(clone)する行為です。<br>
       これをすることで、プルリクエストを送ったりなどの、見知らぬユーザーとの共同開発が可能になります。<br>
       複製したリポジトリ名は同じく「commit-mate.net」で良いでしょう。
     </p>`,
@@ -68,14 +68,15 @@ const contents = [
     title: 'Commit & Push',
     sentenceHTML: `
     <p class="leading-7 text-base mb-6">
-      編集が終わったら、git commit コマンドをします。<br>
+      編集が終わったら、git commit コマンドを実行します。<br>
       オプション -m でメッセージが書けます。できれば英語でメッセージを書いてみましょう。<br>
       コミットとは、現在の状態を最新バージョンとしてリポジトリに保存する行為です。編集する前のデータは古いバージョンとなります。
     </p>
     <p class="leading-7 text-base">
-      次に git push コマンドをします。<br>
+      次に git push コマンドを実行します。<br>
       プッシュとは、現在までのローカルリポジトリのデータを、リモートリポジトリに送信する行為です。これで新しい作業分がリモートリポジトリに追加され、ローカルと同じ最新版になりました。<br>
-      普通は別ブランチを切って作業しますが、今回はコミュニティ参加のための作業なので、mainブランチのまま作業して（component/Members.vue 以外は編集せず）プッシュしましょう。
+      通常は別ブランチを作成して作業しますが、今回はコミュニティ参加のための作業なので、mainブランチのまま作業して（component/Members.vue 以外は編集せず）プッシュしましょう。
+      （もちろん別ブランチを作成し、そのブランチから次ステップのプルリクエストを送ってもらっても構いません）
     </p>
     `,
   },
@@ -84,7 +85,7 @@ const contents = [
     sentenceHTML: `
     <p class="leading-7 text-base">
       自分の commit-mate.net リポジトリを開き、「Pull request」のタブへ移動して、プルリクエストを作成します。<br>
-      Camparing Changes で、自分のリポジトリのmainとフォーク元のリポジトリのmainを比較していることを確認しましょう。<br>
+      Comparing Changes で、自分のリポジトリのmainとフォーク元のリポジトリのmainを比較していることを確認しましょう。<br>
       確認できたら、右下の Create Pull Request をクリックします。<br>
       参加の旨をメッセージで添えて送信します。<br>
       リクエストが承認され、マージされたら参加完了です。
