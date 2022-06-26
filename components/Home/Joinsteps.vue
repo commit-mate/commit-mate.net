@@ -10,12 +10,6 @@ const half = ref(false)
 //   return new URL(`../assets/images/joinstep/${fileName}.jpg`, 'http://localhost:3000/').href
 // }
 
-const options = {
-  root: null,
-  rootMargin: "0% 0%",
-  threshold: 0.7,
-}
-
 onMounted(() => {
   const doWhenIntersect: IntersectionObserverCallback = async (entries) => {
     const entry = entries.find(entry => entry.isIntersecting)
@@ -23,6 +17,11 @@ onMounted(() => {
       currentNumber.value = Number(entry.target.getAttribute('data-number'))
       half.value = !!currentImages.value[1]
     }
+  }
+  const options = {
+    root: null,
+    rootMargin: "0% 0%",
+    threshold: 0.7,
   }
 
   const snapsteps = unref(steps)
