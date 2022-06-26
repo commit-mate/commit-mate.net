@@ -32,6 +32,11 @@ const members: TeamMember[] = [
     displayname: 'roa',
     bio: `Ph.D.student of Information Science. I'm looking forward to developing with you`
   },
+  {
+    id: 'wako-p',
+    displayname: 'wako-p',
+    bio: `I am not a front-end engineer, but I joined to learn the how-to of collaborative development on GitHub.`
+  },
 ]
 </script>
 
