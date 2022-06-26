@@ -24,9 +24,8 @@ onMounted(() => {
     threshold: 0.7,
   }
 
-  const snapsteps = unref(steps)
   const observer = new IntersectionObserver(doWhenIntersect, options);
-  snapsteps.map(target => observer.observe(target))
+  steps.value?.map(target => observer.observe(target))
 })
 
 
