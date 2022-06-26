@@ -33,10 +33,15 @@ const members: TeamMember[] = [
     bio: `Ph.D.student of Information Science. I'm looking forward to developing with you`
   },
   {
+    id: 'azufb',
+    displayname: 'Azusa Okamoto',
+    bio: `Frontend Developer in Hyogo. I usually use TypeScript and React. I'm interested in PHP, Express and Docker. Glad to study with you all.`
+  },
+  {
     id: 'konn3g',
     displayname: 'Ako',
     bio: `I work in the web industry. I am a beginner in development. I'm looking to expand my knowledge in many ways.`
-  },
+  },  
 ]
 </script>
 
