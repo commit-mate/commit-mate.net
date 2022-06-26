@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const data = await queryContent('joinsteps').find()
 const imageData = await queryContent('joinsteps').only(['images']).find()
 const steps = ref(null)
@@ -16,10 +16,10 @@ const options = {
   threshold: 0.7,
 }
 
-const doWhenIntersect = async (entries) => {
+const doWhenIntersect: IntersectionObserverCallback = async (entries) => {
   const entry = entries.find(entry => entry.isIntersecting)
   if (entry) {
-    currentNumber.value = entry.target.dataset.number
+    currentNumber.value = Number(entry.target.getAttribute('data-number'))
     if (currentImgs.value[1]) {
       half.value = true
     } else {
