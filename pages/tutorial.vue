@@ -1,24 +1,24 @@
 <script setup>
 const repositories = ref({
-  origin: {
-    main: {
+  origin: [
+    {
       name: 'origin/main',
       commits: []
-    },
-  },
-  local: {
-    main: {
+    }
+  ],
+  local: [
+    {
       name: 'main',
       commits: []
     }
-  }
+  ]
 })
 
 const createKey = () => {
   return Math.random().toString(32).substring(2)
 }
 
-const currentBranch = ref('main')
+const currentBranch = ref(0)
 const currentCommit = ref(null)
 
 const edit = ref(false)
@@ -42,20 +42,34 @@ const doPush = () => {
 
 }
 
-const doSwitch = () => {
+const doSwitchBranch = () => {
+  currentBranch.value == Object.keys(repositories.value.local).length -1
+  ? currentBranch.value = 0
+  : currentBranch.value += 1
+}
 
+const doCreateBranch = () => {
+  const count = Object.keys(repositories.value.local).length
+  const commitsLength = toRaw(repositories.value.local[currentBranch.value].commits.length)
+  const spacer = toRaw(repositories.value.local[currentBranch.value].spacer)
+  repositories.value.local[count] = {
+    name: `dev-${count}`,
+    commits: [],
+    spacer: commitsLength + (spacer ? spacer : 0)
+  }
+  currentBranch.value = count
+  add.value = false
 }
 
 const clone = ref(false)
-
 const doClone = () => {
-  repositories.value.local.main.commits.push(currentCommit.value)
+  repositories.value.local[0].commits.push(currentCommit.value)
   clone.value = true
 }
 
 onMounted(() => {
   currentCommit.value = createKey()
-  repositories.value.origin.main.commits.push(currentCommit.value)
+  repositories.value.origin[0].commits.push(currentCommit.value)
 })
 
 </script>
@@ -69,20 +83,39 @@ onMounted(() => {
       <div
         v-for="(repository, index) in repositories"
         :key="index"
+        class="mb-8"
       >
 
         <div
           v-for="(branch, index) in repository"
           :key="index"
+          class="mb-2 p-4 flex items-center"
+          :class="{'bg-slate-200': branch.name === repositories.local[currentBranch].name}"
           >
 
-          <div>{{branch.name}}</div>
+          <div class="w-28">{{branch.name}}</div>
 
-          <div
-            v-for="(commit, index) in branch.commits"
-            :key="index"
-            class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-yellow-500 text-white"
+          <div class="flex">
+
+            <div
+              v-show="branch.spacer"
+              class="flex"
             >
+              <div
+              v-for="(space, index) of branch.spacer"
+              :key="index"
+              class="mr-4 w-8 h-8"
+              ></div>
+
+            </div>
+
+            <div
+              v-for="(commit, index) in branch.commits"
+              :key="index"
+              :id="commit"
+              class="mr-4 w-8 h-8 bg-yellow-500 rounded-full"
+              >
+            </div>
 
           </div>
 
@@ -139,19 +172,25 @@ onMounted(() => {
           </button>
 
           <button
-            @click="doSwitch"
             type="button"
             class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-green-500 text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
             >
-            git push -u origin {{currentBranch}}
+            git push -u origin {{repositories.local[currentBranch].name}}
           </button>
 
-          <button type="button" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-            switch branchX
+          <button
+            @click="doSwitchBranch"
+            type="button"
+            class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+            switch {{(currentBranch == Object.keys(repositories.local).length -1) ? repositories.local[0].name : repositories.local[currentBranch+1].name}}
           </button>
 
-          <button type="button" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-            switch -c branchX
+          <button
+            @click="doCreateBranch"
+            type="button"
+            class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+            >
+            switch -c dev-x
           </button>
 
         </div>
