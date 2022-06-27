@@ -46,6 +46,11 @@ const members: TeamMember[] = [
     displayname: 'Ako',
     bio: `I work in the web industry. I am a beginner in development. I'm looking to expand my knowledge in many ways.`
   },
+  {
+    id: 'sa-ji',
+    displayname: 'sa-ji',
+    bio: `I'm an automotive software engineer. I wish to learn the process of the front-end web developments.`
+  }
 ]
 </script>
 
