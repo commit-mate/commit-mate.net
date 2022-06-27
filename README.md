@@ -7,6 +7,8 @@
 
 ![icons](https://user-images.githubusercontent.com/85418440/175254309-c8dfb34d-fbf8-40c1-aa82-45953c138070.png)
 
+[commit-mate.net](https://commit-mate.net/)
+
 ### コミュニティができたきっかけ
 
 Git/GitHubって独学しづらいし、あまり良さわからず使う気になれない、というエンジニアの方は意外と多いのではないでしょうか？
@@ -68,7 +70,7 @@ Semantic Commit Messages を導入して共同開発をします。（解説ペ�
 1.Piece of cake!🍰🍴  
 ***GitHub上の見知らぬユーザーと共同開発のようなことができる機能「フォーク」にチャレンジ！***
 
-[commit-mate](https://commit-mate-net.netlify.app/) トップページにある、step1 ~ step7 のマニュアルを見ながら作業します（まだ未完成です💦）。最後にPR（プルリクエスト）を送ることで、コミュニティ参加申し込みが完了します！
+[commit-mate.net](https://commit-mate.net/) トップページにある、step1 ~ step7 のマニュアルを見ながら作業します（まだ未完成です💦）。最後にPR（プルリクエスト）を送ることで、コミュニティ参加申し込みが完了します！
 この時にわからないことや躓いたこと、自力で解決したことなどをGithubリポジトリのDiscussionsにぜひ投稿してください！
 
 2.Practice!🌿🌲  
