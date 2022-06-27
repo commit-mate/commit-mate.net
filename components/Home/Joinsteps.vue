@@ -1,39 +1,31 @@
-<script setup>
+<script setup lang="ts">
 const data = await queryContent('joinsteps').find()
 const imageData = await queryContent('joinsteps').only(['images']).find()
 const steps = ref(null)
 const currentNumber = ref(0)
-const currentImgs = computed(() => imageData[currentNumber.value].images)
+const currentImages = computed<string[]>(() => imageData[currentNumber.value].images)
 const half = ref(false)
 // SSR mode only
 // const generateImgPath = (fileName) => {
 //   return new URL(`../assets/images/joinstep/${fileName}.jpg`, 'http://localhost:3000/').href
 // }
 
-const options = {
-  root: null,
-  rootMargin: "0% 0%",
-  threshold: 0.7,
-}
-
-const doWhenIntersect = async (entries) => {
-  const entry = entries.find(entry => entry.isIntersecting)
-  if (entry) {
-    currentNumber.value = entry.target.dataset.number
-    if (currentImgs.value[1]) {
-      half.value = true
-    } else {
-      half.value = false
+onMounted(() => {
+  const doWhenIntersect: IntersectionObserverCallback = async (entries) => {
+    const entry = entries.find(entry => entry.isIntersecting)
+    if (entry) {
+      currentNumber.value = Number(entry.target.getAttribute('data-number'))
+      half.value = !!currentImages.value[1]
     }
   }
-}
+  const options = {
+    root: null,
+    rootMargin: "0% 0%",
+    threshold: 0.7,
+  }
 
-onMounted(() => {
-  const snapsteps = unref(steps)
   const observer = new IntersectionObserver(doWhenIntersect, options);
-  snapsteps.forEach(target => {
-    observer.observe(target)
-  })
+  steps.value?.map(target => observer.observe(target))
 })
 
 
@@ -83,7 +75,7 @@ onMounted(() => {
               :src="`../assets/images/joinstep/${imageName}.jpg`"
               :alt="imageName"
               class="flexible inline-block h-full object-cover"
-              :class="{'w-[100%]': index === 0, 'w-[0%]': index === 1, 'half': (half && currentImgs[1])}"
+              :class="{'w-[100%]': index === 0, 'w-[0%]': index === 1, 'half': (half && currentImages[1])}"
             />
 
 
