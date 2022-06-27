@@ -50,7 +50,12 @@ const members: TeamMember[] = [
     id: 'sa-ji',
     displayname: 'sa-ji',
     bio: `I'm an automotive software engineer. I wish to learn the process of the front-end web developments.`
-  }
+  },
+  {
+    id: 'Pomerican',
+    displayname: 'Pomerican',
+    bio: `I don't know who I am... because I'm dispatched engineer. I want to have fun with you all. Of all mushrooms, maitake are my favorite.`
+  },
 ]
 </script>
 
