@@ -50,8 +50,8 @@ const doPushUpStream = () => { // the first push ... origin にまだ存在し�
 
   const newName = 'origin/' + copiedBranch.name // new branch's name on origin ... origin のブランチになるので冒頭に origin/ をつける
 
-  origin.value[newName] = { // pushing new branch to origin containing name, commits, spacer data ... origin へ新たなブランチをプッシュ！
-    name: copiedBranch.name,
+  origin.value[copiedBranch.name] = { // pushing new branch to origin containing name, commits, spacer data ... origin へ新たなブランチをプッシュ！
+    name: newName,
     commits: copiedBranch.commits,
     spacer: copiedBranch.spacer
   }
