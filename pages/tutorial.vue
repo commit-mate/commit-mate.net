@@ -17,6 +17,8 @@ const local = ref(
   ]
 )
 
+const repositories = computed(() => [origin.value, local.value])
+
 const createKey = () => {
   return Math.random().toString(32).substring(2)
 }
@@ -42,10 +44,11 @@ const doCommit = () => {
 }
 
 const doPush = () => {
-  const branchSnap = toRaw(.local[currentBranch.value])
-  branchSnap.name = 'origin/' + branchSnap.name
-  // ↓ it's acting weeiiirrrd, the behavior, as pushing an object to "origin", it will also push to "local" as same even if it's raw (not ref() ), is like a bug.
-  origin.value.push(branchSnap)
+  const snapLocalBranch = toRaw(local.value)
+  const snapCurrentBranch = toRaw(currentBranch.value)
+  const copiedBranch = toRaw(snapLocalBranch[snapCurrentBranch])
+  copiedBranch.name = 'origin/' + copiedBranch.name
+  origin.value.push({ name: 'test', commits: copiedBranch.commits, spacer: copiedBranch.spacer })
 }
 
 const doSwitchBranch = () => {
@@ -56,8 +59,8 @@ const doSwitchBranch = () => {
 
 const doCreateBranch = () => {
   const count = Object.keys(local.value).length
-  const commitsLength = toRaw(local.value[currentBranch.value].commits.length)
-  const spacer = toRaw(.local[currentBranch.value].spacer)
+  const commitsLength = toRaw(local.value)[toRaw(currentBranch.value)].commits.length
+  const spacer = toRaw(local.value)[toRaw(currentBranch.value)].spacer
   local.value[count] = {
     name: `dev-${count}`,
     commits: [],
@@ -127,6 +130,7 @@ onMounted(() => {
 
         </div>
       </div>
+
 
     </div>
 
