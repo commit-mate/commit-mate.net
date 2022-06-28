@@ -41,6 +41,7 @@ const doCommit = () => {
 const doPush = () => {
   const branchSnap = toRaw(repositories.value.local[currentBranch.value])
   branchSnap.name = 'origin/' + branchSnap.name
+  // ↓ it's acting weeiiirrrd, the behavior, as pushing an object to "repositories.origin", it will also push to "repositories.local" as same even if it's raw (not ref() ), is like a bug.
   repositories.value.origin.push(branchSnap)
 }
 
