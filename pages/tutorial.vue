@@ -39,7 +39,9 @@ const doCommit = () => {
 }
 
 const doPush = () => {
-
+  const branchSnap = toRaw(repositories.value.local[currentBranch.value])
+  branchSnap.name = 'origin/' + branchSnap.name
+  repositories.value.origin.push(branchSnap)
 }
 
 const doSwitchBranch = () => {
@@ -83,13 +85,13 @@ onMounted(() => {
       <div
         v-for="(repository, index) in repositories"
         :key="index"
-        class="mb-8"
+        class="mb-4"
       >
 
         <div
           v-for="(branch, index) in repository"
           :key="index"
-          class="mb-2 p-4 flex items-center"
+          class="mb-2 p-2 flex items-center"
           :class="{'bg-slate-200': branch.name === repositories.local[currentBranch].name}"
           >
 
@@ -104,7 +106,7 @@ onMounted(() => {
               <div
               v-for="(space, index) of branch.spacer"
               :key="index"
-              class="mr-4 w-8 h-8"
+              class="mr-2 w-4 h-4"
               ></div>
 
             </div>
@@ -113,7 +115,7 @@ onMounted(() => {
               v-for="(commit, index) in branch.commits"
               :key="index"
               :id="commit"
-              class="mr-4 w-8 h-8 bg-yellow-500 rounded-full"
+              class="mr-2 w-4 h-4 bg-yellow-500 rounded-full"
               >
             </div>
 
@@ -172,6 +174,7 @@ onMounted(() => {
           </button>
 
           <button
+            @click="doPush"
             type="button"
             class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-green-500 text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
             >
