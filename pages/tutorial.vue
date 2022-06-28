@@ -44,16 +44,18 @@ const doCommit = () => {
 }
 
 const doPushUpStream = () => { // the first push ... origin にまだ存在しないブランチをプッシュ
-  const snapLocalBranch = toRaw(local.value) // the raw data of local branch (not ref) ... ローカルreposの状況をスナップショット！
-  const snapCurrentBranch = toRaw(currentBranch.value) // the raw data of current branch name (not ref) ... 現在のブランチの名前のスナップショット！
-  const copiedBranch = snapLocalBranch[snapCurrentBranch] // copying the current branch's state (taking snap shot!) ... push するブランチオブジェクトを格納！
 
-  const newName = 'origin/' + copiedBranch.name // new branch's name on origin ... origin のブランチになるので冒頭に origin/ をつける
+  const snapBranch = local.value[currentBranch.value]
 
-  origin.value[copiedBranch.name] = { // pushing new branch to origin containing name, commits, spacer data ... origin へ新たなブランチをプッシュ！
+  const newCommitsArr = []
+  snapBranch.commits.forEach(commit => newCommitsArr.push(commit))
+
+  const newName = 'origin/' + snapBranch.name // new branch's name on origin ... origin のブランチになるので冒頭に origin/ をつける
+
+  origin.value[snapBranch.name] = { // pushing new branch to origin containing name, commits, spacer data ... origin へ新たなブランチをプッシュ！
     name: newName,
-    commits: copiedBranch.commits,
-    spacer: copiedBranch.spacer
+    commits: newCommitsArr,
+    spacer: snapBranch.spacer
   }
   // スナップショット（静的）なはずなのに、originへ追加した途端、ref()に戻ってしまう（localのデータと連動し始める）
   // array.push()する前に、スナップショットオブジェクトの値を変更したり試したが、きちんとRawなデータでrefのデータとは切り離されていた。
