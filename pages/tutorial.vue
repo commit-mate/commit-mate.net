@@ -47,7 +47,7 @@ const snapBranch = computed(() => local.value[currentBranch.value])
 const targetBranchName = computed(() => snapBranch.value.name)
 const targetBranch = computed(() => origin.value[targetBranchName.value])
 
-const canPush = computed(() => targetBranchName.value ? true : false )
+const canPush = computed(() => targetBranch.value?.name ? true : false )
 const doPush = () => {
 
   const newCommitsArr = []
@@ -105,8 +105,6 @@ onMounted(() => {
 <template>
 
   <div class="max-w-7xl mx-auto section-inner">
-    <p>origin - target: {{targetBranch}}</p>
-    <p>local - snap: {{snapBranch}}</p>
 
     <div id="branches">
 
@@ -206,7 +204,9 @@ onMounted(() => {
           <button
             @click="doPush"
             type="button"
-            class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-green-500 text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+            class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-green-500 text-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+            :class="{'focus:outline-none focus:ring-2 bg-green-300 focus:ring-offset-2 transition-all cursor-not-allowed': !canPush, 'hover:bg-green-600 bg-green-500': canPush}"
+            :disabled="!canPush"
             >
             git push
           </button>
@@ -238,6 +238,11 @@ onMounted(() => {
 
       </div>
 
+    </div>
+
+    <div class="bg-slate-900 text-white p-4">
+      <p class="text-xs">origin - target: {{targetBranch}}</p>
+      <p class="text-xs">local - snap: {{snapBranch}}</p>
     </div>
 
   </div>
