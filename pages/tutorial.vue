@@ -43,23 +43,32 @@ const doCommit = () => {
   edit.value = false
 }
 
-const doPushUpStream = () => { // the first push ... origin にまだ存在しないブランチをプッシュ
+const push = ref(true)
+const doPush = () => {
+  const snapBranch = local.value[currentBranch.value]
+  const targetBranchName = snapBranch.name
+  const targetBranch = origin.value[targetBranchName]
+
+  const newCommitsArr = []
+  snapBranch.commits.forEach(commit => newCommitsArr.push(commit))
+
+  targetBranch.commits = newCommitsArr
+}
+
+const doPushUpStream = () => {
 
   const snapBranch = local.value[currentBranch.value]
 
   const newCommitsArr = []
   snapBranch.commits.forEach(commit => newCommitsArr.push(commit))
 
-  const newName = 'origin/' + snapBranch.name // new branch's name on origin ... origin のブランチになるので冒頭に origin/ をつける
+  const newName = 'origin/' + snapBranch.name
 
-  origin.value[snapBranch.name] = { // pushing new branch to origin containing name, commits, spacer data ... origin へ新たなブランチをプッシュ！
+  origin.value[snapBranch.name] = {
     name: newName,
     commits: newCommitsArr,
     spacer: snapBranch.spacer
   }
-  // スナップショット（静的）なはずなのに、originへ追加した途端、ref()に戻ってしまう（localのデータと連動し始める）
-  // array.push()する前に、スナップショットオブジェクトの値を変更したり試したが、きちんとRawなデータでrefのデータとは切り離されていた。
-  // array.push()した途端、全て参照し始めた
 }
 
 const doSwitchBranch = () => {
@@ -194,6 +203,14 @@ onMounted(() => {
           </button>
 
           <button
+            @click="doPush"
+            type="button"
+            class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-green-500 text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+            >
+            git push
+          </button>
+
+          <button
             @click="doPushUpStream"
             type="button"
             class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-green-500 text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
@@ -213,7 +230,7 @@ onMounted(() => {
             type="button"
             class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
             >
-            switch -c dev-x
+            switch -c dev_{{local.length}}
           </button>
 
         </div>
