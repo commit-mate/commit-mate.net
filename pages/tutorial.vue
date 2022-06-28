@@ -26,48 +26,47 @@ const createKey = () => {
 const currentBranch = ref(0)
 const currentCommit = ref(null)
 
-const edit = ref(false)
+const edited = ref(false)
 const doEdit = () => {
-  edit.value = true
+  edited.value = true
 }
 
-const add = ref(false)
+const canAdd = ref(true)
 const doAdd = () => {
-  add.value = true
+  canAdd.value = false
 }
 
-const commitAble = computed(() => edit.value && add.value ? true : false )
+const canCommit = computed(() => edited.value && !canAdd.value ? true : false )
 const doCommit = () => {
   const randomKey = createKey()
   local.value[currentBranch.value].commits.push(randomKey)
-  edit.value = false
+  edited.value = false
 }
 
-const push = ref(true)
+const snapBranch = computed(() => local.value[currentBranch.value])
+const targetBranchName = computed(() => snapBranch.value.name)
+const targetBranch = computed(() => origin.value[targetBranchName.value])
+
+const canPush = computed(() => targetBranchName.value ? true : false )
 const doPush = () => {
-  const snapBranch = local.value[currentBranch.value]
-  const targetBranchName = snapBranch.name
-  const targetBranch = origin.value[targetBranchName]
 
   const newCommitsArr = []
-  snapBranch.commits.forEach(commit => newCommitsArr.push(commit))
+  snapBranch.value.commits.forEach(commit => newCommitsArr.push(commit))
 
-  targetBranch.commits = newCommitsArr
+  targetBranch.value.commits = newCommitsArr
 }
 
 const doPushUpStream = () => {
 
-  const snapBranch = local.value[currentBranch.value]
-
   const newCommitsArr = []
-  snapBranch.commits.forEach(commit => newCommitsArr.push(commit))
+  snapBranch.value.commits.forEach(commit => newCommitsArr.push(commit))
 
-  const newName = 'origin/' + snapBranch.name
+  const newName = 'origin/' + snapBranch.value.name
 
-  origin.value[snapBranch.name] = {
+  origin.value[snapBranch.value.name] = {
     name: newName,
     commits: newCommitsArr,
-    spacer: snapBranch.spacer
+    spacer: snapBranch.value.spacer
   }
 }
 
@@ -87,7 +86,7 @@ const doCreateBranch = () => {
     spacer: commitsLength + (spacer ? spacer : 0)
   }
   currentBranch.value = count
-  add.value = false
+  canAdd.value = true
 }
 
 const clone = ref(false)
@@ -106,6 +105,8 @@ onMounted(() => {
 <template>
 
   <div class="max-w-7xl mx-auto section-inner">
+    <p>origin - target: {{targetBranch}}</p>
+    <p>local - snap: {{snapBranch}}</p>
 
     <div id="branches">
 
@@ -186,8 +187,8 @@ onMounted(() => {
             @click="doAdd"
             type="button"
             class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
-            :class="{'focus:outline-none focus:ring-2 bg-red-300 focus:ring-offset-2 transition-all cursor-not-allowed': add, 'hover:bg-red-600 bg-red-500': !add}"
-            :disabled="add"
+            :class="{'focus:outline-none focus:ring-2 bg-red-300 focus:ring-offset-2 transition-all cursor-not-allowed': !canAdd, 'hover:bg-red-600 bg-red-500': canAdd}"
+            :disabled="!canAdd"
             >
             add .
           </button>
@@ -196,8 +197,8 @@ onMounted(() => {
             @click="doCommit"
             type="button"
             class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
-            :class="{'focus:outline-none focus:ring-2 bg-yellow-300 focus:ring-offset-2 transition-all cursor-not-allowed': !commitAble, 'hover:bg-yellow-600 bg-yellow-500': commitAble}"
-            :disabled="!commitAble"
+            :class="{'focus:outline-none focus:ring-2 bg-yellow-300 focus:ring-offset-2 transition-all cursor-not-allowed': !canCommit, 'hover:bg-yellow-600 bg-yellow-500': canCommit}"
+            :disabled="!canCommit"
             >
             commit
           </button>
