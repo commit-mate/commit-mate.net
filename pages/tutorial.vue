@@ -1,11 +1,11 @@
 <script setup>
 const origin = ref(
-  [
-    {
+  {
+    main: {
       name: 'origin/main',
       commits: []
     }
-  ]
+  }
 )
 
 const local = ref(
@@ -43,12 +43,19 @@ const doCommit = () => {
   edit.value = false
 }
 
-const doPush = () => {
-  const snapLocalBranch = toRaw(local.value)
-  const snapCurrentBranch = toRaw(currentBranch.value)
-  const copiedBranch = toRaw(snapLocalBranch[snapCurrentBranch])
-  copiedBranch.name = 'origin/' + copiedBranch.name
-  origin.value.push({ name: 'test', co1mmits: copiedBranch.commits, spacer: copiedBranch.spacer })
+const doPushUpStream = () => { // the first push ... origin にまだ存在しないブランチをプッシュ
+  const snapLocalBranch = toRaw(local.value) // the raw data of local branch (not ref) ... ローカルreposの状況をスナップショット！
+  const snapCurrentBranch = toRaw(currentBranch.value) // the raw data of current branch name (not ref) ... 現在のブランチの名前のスナップショット！
+  const copiedBranch = snapLocalBranch[snapCurrentBranch] // copying the current branch's state (taking snap shot!) ... push するブランチオブジェクトを格納！
+
+  const newName = 'origin/' + copiedBranch.name // new branch's name on origin ... origin のブランチになるので冒頭に origin/ をつける
+
+  origin.value[newName] = { // pushing new branch to origin containing name, commits, spacer data ... origin へ新たなブランチをプッシュ！
+    name: copiedBranch.name,
+    commits: copiedBranch.commits,
+    spacer: copiedBranch.spacer
+  }
+  // スナップショット（静的）なはずなのに、originへ追加した途端、ref()に戻ってしまう（localのデータと連動し始める）
 }
 
 const doSwitchBranch = () => {
@@ -62,7 +69,7 @@ const doCreateBranch = () => {
   const commitsLength = toRaw(local.value)[toRaw(currentBranch.value)].commits.length
   const spacer = toRaw(local.value)[toRaw(currentBranch.value)].spacer
   local.value[count] = {
-    name: `dev-${count}`,
+    name: `dev_${count}`,
     commits: [],
     spacer: commitsLength + (spacer ? spacer : 0)
   }
@@ -78,7 +85,7 @@ const doClone = () => {
 
 onMounted(() => {
   currentCommit.value = createKey()
-  origin.value[0].commits.push(currentCommit.value)
+  origin.value['main'].commits.push(currentCommit.value)
 })
 
 </script>
@@ -182,7 +189,7 @@ onMounted(() => {
           </button>
 
           <button
-            @click="doPush"
+            @click="doPushUpStream"
             type="button"
             class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-green-500 text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
             >
