@@ -101,7 +101,8 @@ onMounted(() => {
       <div
         v-for="(repository, index) in repositories"
         :key="index"
-        class="mb-4"
+        class="mb-8 py-4"
+        :class="{'bg-slate-200': index === 0}"
       >
 
         <div
