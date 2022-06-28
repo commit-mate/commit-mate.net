@@ -48,7 +48,7 @@ const doPush = () => {
   const snapCurrentBranch = toRaw(currentBranch.value)
   const copiedBranch = toRaw(snapLocalBranch[snapCurrentBranch])
   copiedBranch.name = 'origin/' + copiedBranch.name
-  origin.value.push({ name: 'test', commits: copiedBranch.commits, spacer: copiedBranch.spacer })
+  origin.value.push({ name: 'test', co1mmits: copiedBranch.commits, spacer: copiedBranch.spacer })
 }
 
 const doSwitchBranch = () => {
