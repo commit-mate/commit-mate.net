@@ -9,12 +9,12 @@ const origin = ref(
 )
 
 const local = ref(
-  [
-    {
+  {
+    main: {
       name: 'main',
       commits: []
     }
-  ]
+  }
 )
 
 const repositories = computed(() => [origin.value, local.value])
@@ -23,8 +23,15 @@ const createKey = () => {
   return Math.random().toString(32).substring(2)
 }
 
-const currentBranch = ref(0)
+/** current state */
+const currentBranchIndex = ref(0)
+const currentBranchName = computed(() => {
+  const branchNames = Object.keys(local.value)
+  return branchNames[currentBranchIndex.value]
+})
+const currentBranch = computed(() => local.value[currentBranchName.value])
 const currentCommit = ref(null)
+const countBranch = computed(() => Object.keys(local.value).length)
 
 /** edit */
 const edited = ref(false)
@@ -42,29 +49,27 @@ const doAdd = () => {
 const canCommit = computed(() => edited.value && !canAdd.value ? true : false )
 const doCommit = () => {
   const randomKey = createKey()
-  local.value[currentBranch.value].commits.push(randomKey)
+  currentBranch.value.commits.push(randomKey)
   edited.value = false
 }
 
 /** git push */
-const snapBranch = computed(() => local.value[currentBranch.value])
-const targetBranchName = computed(() => snapBranch.value.name)
-const targetBranch = computed(() => origin.value[targetBranchName.value])
+const targetBranch = computed(() => origin.value[currentBranchName.value])
 
 const canPush = computed(() => targetBranch.value?.name ? true : false )
 const doPush = () => {
-  targetBranch.value.commits = [...snapBranch.value.commits]
+  targetBranch.value.commits = [...currentBranch.value.commits]
 }
 
 const canPushUpStream = computed(() => !canPush.value )
 const doPushUpStream = () => {
 
-  const newName = 'origin/' + snapBranch.value.name
+  const newName = 'origin/' + currentBranchName.value
 
-  origin.value[snapBranch.value.name] = {
+  origin.value[currentBranchName.value] = {
     name: newName,
-    commits: [...snapBranch.value.commits],
-    spacer: snapBranch.value.spacer
+    commits: [...currentBranch.value.commits],
+    spacer: currentBranch.value.spacer
   }
 }
 
@@ -77,28 +82,28 @@ const doPushUpStream = () => {
 
 /** git switch */
 const doSwitchBranch = () => {
-  currentBranch.value == Object.keys(local.value).length -1
-  ? currentBranch.value = 0
-  : currentBranch.value += 1
+  currentBranchIndex.value === countBranch.value -1
+  ? currentBranchIndex.value = 0
+  : currentBranchIndex.value += 1
 }
 
 const doCreateBranch = () => {
-  const count = Object.keys(local.value).length
-  const commitsLength = toRaw(local.value)[toRaw(currentBranch.value)].commits.length
-  const spacer = toRaw(local.value)[toRaw(currentBranch.value)].spacer
-  local.value[count] = {
-    name: `dev_${count}`,
+  const newBranchName = `dev_${countBranch.value}`
+  const commitsLength = toRaw(local.value)[toRaw(currentBranchName.value)].commits.length
+  const spacer = toRaw(local.value)[toRaw(currentBranchName.value)].spacer
+  local.value[newBranchName] = {
+    name: newBranchName,
     commits: [],
     spacer: commitsLength + (spacer ? spacer : 0)
   }
-  currentBranch.value = count
+  currentBranchIndex.value = countBranch.value -1
   canAdd.value = true
 }
 
 /** git clone */
 const clone = ref(false)
 const doClone = () => {
-  local.value[0].commits.push(currentCommit.value)
+  currentBranch.value.commits.push(currentCommit.value)
   clone.value = true
 }
 
@@ -126,7 +131,7 @@ onMounted(() => {
           v-for="(branch, index) in repository"
           :key="index"
           class="mb-2 p-2 flex items-center"
-          :class="{'bg-slate-200': branch.name === local[currentBranch].name}"
+          :class="{'bg-slate-200': branch.name === local[currentBranchName].name}"
           >
 
           <div class="w-28">{{branch.name}}</div>
@@ -225,14 +230,14 @@ onMounted(() => {
             :class="{'focus:outline-none focus:ring-2 bg-green-300 focus:ring-offset-2 transition-all cursor-not-allowed': !canPushUpStream, 'hover:bg-green-600 bg-green-500': canPushUpStream}"
             :disabled="!canPushUpStream"
             >
-            git push -u origin {{local[currentBranch].name}}
+            git push -u origin {{local[currentBranchName].name}}
           </button>
 
           <button
             @click="doSwitchBranch"
             type="button"
             class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-            switch {{(currentBranch == Object.keys(local).length -1) ? local[0].name : local[currentBranch+1].name}}
+            switch {{(currentBranchIndex === countBranch) ? 'main' : `dev_${currentBranchIndex+1}`}}
           </button>
 
           <button
@@ -240,7 +245,7 @@ onMounted(() => {
             type="button"
             class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
             >
-            switch -c dev_{{local.length}}
+            switch -c dev_{{countBranch}}
           </button>
 
         </div>
@@ -251,7 +256,7 @@ onMounted(() => {
 
     <div class="bg-slate-900 text-white p-4">
       <p class="text-xs">origin - target: {{targetBranch}}</p>
-      <p class="text-xs">local - snap: {{snapBranch}}</p>
+      <p class="text-xs">local - snap: {{currentBranch}}</p>
     </div>
 
   </div>
