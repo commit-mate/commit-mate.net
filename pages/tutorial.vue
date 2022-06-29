@@ -26,16 +26,19 @@ const createKey = () => {
 const currentBranch = ref(0)
 const currentCommit = ref(null)
 
+/** edit */
 const edited = ref(false)
 const doEdit = () => {
   edited.value = true
 }
 
+/** git add */
 const canAdd = ref(true)
 const doAdd = () => {
   canAdd.value = false
 }
 
+/** git commit */
 const canCommit = computed(() => edited.value && !canAdd.value ? true : false )
 const doCommit = () => {
   const randomKey = createKey()
@@ -43,6 +46,7 @@ const doCommit = () => {
   edited.value = false
 }
 
+/** git push */
 const snapBranch = computed(() => local.value[currentBranch.value])
 const targetBranchName = computed(() => snapBranch.value.name)
 const targetBranch = computed(() => origin.value[targetBranchName.value])
@@ -64,6 +68,14 @@ const doPushUpStream = () => {
   }
 }
 
+/** github pull request */
+
+/** github approval pull request */
+
+/** git pull */
+
+
+/** git switch */
 const doSwitchBranch = () => {
   currentBranch.value == Object.keys(local.value).length -1
   ? currentBranch.value = 0
@@ -83,6 +95,7 @@ const doCreateBranch = () => {
   canAdd.value = true
 }
 
+/** git clone */
 const clone = ref(false)
 const doClone = () => {
   local.value[0].commits.push(currentCommit.value)
