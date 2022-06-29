@@ -49,23 +49,17 @@ const targetBranch = computed(() => origin.value[targetBranchName.value])
 
 const canPush = computed(() => targetBranch.value?.name ? true : false )
 const doPush = () => {
-
-  const newCommitsArr = []
-  snapBranch.value.commits.forEach(commit => newCommitsArr.push(commit))
-
-  targetBranch.value.commits = newCommitsArr
+  targetBranch.value.commits = [...snapBranch.value.commits]
 }
 
+const canPushUpStream = computed(() => !canPush.value )
 const doPushUpStream = () => {
-
-  const newCommitsArr = []
-  snapBranch.value.commits.forEach(commit => newCommitsArr.push(commit))
 
   const newName = 'origin/' + snapBranch.value.name
 
   origin.value[snapBranch.value.name] = {
     name: newName,
-    commits: newCommitsArr,
+    commits: [...snapBranch.value.commits],
     spacer: snapBranch.value.spacer
   }
 }
@@ -214,7 +208,9 @@ onMounted(() => {
           <button
             @click="doPushUpStream"
             type="button"
-            class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-green-500 text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+            class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-green-500 text-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+            :class="{'focus:outline-none focus:ring-2 bg-green-300 focus:ring-offset-2 transition-all cursor-not-allowed': !canPushUpStream, 'hover:bg-green-600 bg-green-500': canPushUpStream}"
+            :disabled="!canPushUpStream"
             >
             git push -u origin {{local[currentBranch].name}}
           </button>
