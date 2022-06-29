@@ -89,8 +89,8 @@ const doSwitchBranch = () => {
 
 const doCreateBranch = () => {
   const newBranchName = `dev_${countBranch.value}`
-  const commitsLength = toRaw(local.value)[toRaw(currentBranchName.value)].commits.length
-  const spacer = toRaw(local.value)[toRaw(currentBranchName.value)].spacer
+  const commitsLength = [...currentBranch.value.commits].length
+  const spacer = currentBranch.value.spacer
   local.value[newBranchName] = {
     name: newBranchName,
     commits: [],
@@ -237,7 +237,7 @@ onMounted(() => {
             @click="doSwitchBranch"
             type="button"
             class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-            switch {{(currentBranchIndex === countBranch) ? 'main' : `dev_${currentBranchIndex+1}`}}
+            switch {{(currentBranchIndex === countBranch-1) ? 'main' : `dev_${currentBranchIndex+1}`}}
           </button>
 
           <button
