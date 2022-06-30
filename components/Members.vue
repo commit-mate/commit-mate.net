@@ -40,7 +40,7 @@ const members: TeamMember[] = [
   {
     id: 'wako-p',
     displayname: 'wako-p',
-    bio: `I am not a front-end engineer, but I joined to learn the how-to of collaborative development on GitHub.`
+    bio: `I am not a frontend engineer, but I fully understand CSS. Next I would like to fully understand the how-to's of collaborative development on GitHub through the community.`
   },
   {
     id: 'konn3g',
