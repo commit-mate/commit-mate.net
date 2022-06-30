@@ -14,6 +14,10 @@ const exists = computed(() => CustomCardComponent !== CustomCardName)
 </script>
 
 <template>
-  <component :is="CustomCardComponent" v-if="exists" :member="props.member" :id="props.member.id"/>
+  <component :is="CustomCardComponent" v-if="exists" :member="props.member" :id="props.member.id">
+    <template #displayname>{{member.displayname}}</template>
+    <template #id>{{member.id}}</template>
+    <template #bio>{{member.bio}}</template>
+  </component>
   <CardDefault v-else :member="props.member" :id="props.member.id"/>
 </template>
