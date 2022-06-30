@@ -1,4 +1,7 @@
 <script setup>
+// @TODO change random key to color code
+// @TODO describe direction line between commits
+
 const origin = ref(
   {
     main: {
@@ -18,6 +21,7 @@ const local = ref(
 )
 
 const repositories = computed(() => [origin.value, local.value])
+const branching = ref([])
 
 const createKey = () => {
   return Math.random().toString(32).substring(2)
@@ -50,6 +54,7 @@ const canCommit = computed(() => edited.value && !canAdd.value ? true : false )
 const doCommit = () => {
   const randomKey = createKey()
   currentBranch.value.commits.push(randomKey)
+  currentCommit.value = randomKey
   edited.value = false
 }
 
@@ -65,7 +70,6 @@ const canPushUpStream = computed(() => !canPush.value )
 const doPushUpStream = () => {
 
   const newName = 'origin/' + currentBranchName.value
-
   origin.value[currentBranchName.value] = {
     name: newName,
     commits: [...currentBranch.value.commits],
@@ -97,6 +101,7 @@ const doCreateBranch = () => {
     spacer: commitsLength + (spacer ? spacer : 0)
   }
   currentBranchIndex.value = countBranch.value -1
+  branching.value.push(currentCommit.value)
   canAdd.value = true
 }
 
@@ -130,11 +135,11 @@ onMounted(() => {
         <div
           v-for="(branch, index) in repository"
           :key="index"
-          class="mb-2 p-2 flex items-center"
+          class="py-2 flex items-center"
           :class="{'bg-slate-200': branch.name === local[currentBranchName].name}"
           >
 
-          <div class="w-28">{{branch.name}}</div>
+          <div class="w-28 text-xs">{{branch.name}}</div>
 
           <div class="flex">
 
@@ -154,6 +159,7 @@ onMounted(() => {
               v-for="(commit, index) in branch.commits"
               :key="index"
               :id="commit"
+              :class="{'branching': branching?.find(id => id === commit ? true : false)}"
               class="mr-2 w-4 h-4 bg-yellow-500 rounded-full"
               >
             </div>
@@ -257,8 +263,28 @@ onMounted(() => {
     <div class="bg-slate-900 text-white p-4">
       <p class="text-xs">origin - target: {{targetBranch}}</p>
       <p class="text-xs">local - snap: {{currentBranch}}</p>
+      <p class="text-xs">branching: {{branching}}</p>
     </div>
 
   </div>
 
 </template>
+
+<style scoped>
+
+.branching {
+  position: relative;
+}
+.branching::before {
+  content: '';
+  position: absolute;
+  display: block;
+  top: calc(50% - 1px);
+  left: .5rem;
+  width: 2rem;
+  height: 2px;
+  background: gray;
+  transform: rotate(45deg);
+  transform-origin: left center;
+}
+</style>
