@@ -20,6 +20,7 @@ const local = ref(
   }
 )
 
+/** View Settings */
 const repositories = computed(() => [origin.value, local.value])
 const branching = ref([])
 
@@ -100,8 +101,8 @@ const doCreateBranch = () => {
     commits: [],
     spacer: commitsLength + (spacer ? spacer : 0)
   }
+  branching.value.push({id: currentCommit.value, index: currentBranchIndex.value, count_branch: countBranch.value})
   currentBranchIndex.value = countBranch.value -1
-  branching.value.push(currentCommit.value)
   canAdd.value = true
 }
 
@@ -117,6 +118,9 @@ onMounted(() => {
   origin.value['main'].commits.push(currentCommit.value)
 })
 
+
+/** Heron's  */
+
 </script>
 
 <template>
@@ -126,34 +130,36 @@ onMounted(() => {
     <div id="branches">
 
       <div
-        v-for="(repository, index) in repositories"
-        :key="index"
+        v-for="(repository, key, repoIndex) in repositories"
+        :key="repoIndex"
         class="mb-8 py-4"
-        :class="{'bg-slate-200': index === 0}"
+        :class="{'bg-slate-200': repoIndex === 0}"
       >
 
         <div
-          v-for="(branch, index) in repository"
-          :key="index"
-          class="py-2 flex items-center"
+          v-for="(branch, key, braIndex) in repository"
+          :key="braIndex"
+          class="flex items-center"
           >
 
-          <div
-            class="w-28 text-xs"
-            :class="{'bg-slate-200': branch.name === local[currentBranchName].name}">
-            {{branch.name}}
+          <div class="w-28">
+            <span
+              :class="{'bg-slate-200': branch.name === local[currentBranchName].name}"
+              class="text-xs">
+              {{branch.name}}
+            </span>
           </div>
 
-          <div class="flex">
+          <div class="flex box-border">
 
             <div
               v-show="branch.spacer"
               class="flex"
             >
               <div
-              v-for="(space, index) of branch.spacer"
-              :key="index"
-              class="mr-2 w-4 h-4"
+                v-for="(space, index) of branch.spacer"
+                :key="spaIndex"
+                class="w-6 h-6"
               ></div>
 
             </div>
@@ -162,16 +168,28 @@ onMounted(() => {
               v-for="(commit, index) in branch.commits"
               :key="index"
               :id="commit"
-              :class="{'branching': branching?.find(id => id === commit ? true : false)}"
-              class="mr-2 w-4 h-4 bg-yellow-500 rounded-full"
+              class="w-6 h-6 border-t-2 border-l-2 border-con"
+            >
+              <div
+                v-show="branching.filter(data => data.id === commit).length"
+                :set="branchingData = branching?.filter(data => data.id === commit)[0]"
+                class="branching"
+                :style="{
+                  'width': `${Math.sqrt(((1.5 ** 2)+(1.5 * (branchingData?.count_branch - (branchingData?.index + 1))) ** 2))}rem`,
+                  'transform': `rotate(${}deg)`
+                }"
               >
+                {{branchingData}}
+              </div>
+
+              <div class="commit w-3 h-3 bg-yellow-500 rounded-full"></div>
+
             </div>
 
           </div>
 
         </div>
       </div>
-
 
     </div>
 
@@ -275,19 +293,19 @@ onMounted(() => {
 
 <style scoped>
 
-.branching {
-  position: relative;
-}
-.branching::before {
-  content: '';
+.commit {
   position: absolute;
-  display: block;
-  top: calc(50% - 1px);
-  left: .5rem;
-  width: 2rem;
-  height: 2px;
-  background: gray;
-  transform: rotate(45deg);
-  transform-origin: left center;
+  top: -25%;
+  left: -25%;
 }
+.branching {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: black;
+  transform-origin: 0 0;
+  transform: rotate(45deg)
+}
+
 </style>
