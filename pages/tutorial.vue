@@ -136,10 +136,13 @@ onMounted(() => {
           v-for="(branch, index) in repository"
           :key="index"
           class="py-2 flex items-center"
-          :class="{'bg-slate-200': branch.name === local[currentBranchName].name}"
           >
 
-          <div class="w-28 text-xs">{{branch.name}}</div>
+          <div
+            class="w-28 text-xs"
+            :class="{'bg-slate-200': branch.name === local[currentBranchName].name}">
+            {{branch.name}}
+          </div>
 
           <div class="flex">
 
