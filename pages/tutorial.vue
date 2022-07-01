@@ -119,7 +119,19 @@ onMounted(() => {
 })
 
 
-/** Heron's  */
+/** Heron's formula  */
+const calcTriangle = (branchingData) => {
+  const c = 1.5
+  const b = (branchingData?.count_branch - (branchingData?.index + 1)) * c
+  const a = Math.sqrt((c ** 2) + (b ** 2))
+  const tan = Math.atan2(b, c)
+  const deg = tan * 180 / Math.PI
+
+  return {
+    width: a,
+    rotate: deg
+  }
+}
 
 </script>
 
@@ -158,7 +170,7 @@ onMounted(() => {
             >
               <div
                 v-for="(space, index) of branch.spacer"
-                :key="spaIndex"
+                :key="index"
                 class="w-6 h-6"
               ></div>
 
@@ -175,11 +187,10 @@ onMounted(() => {
                 :set="branchingData = branching?.filter(data => data.id === commit)[0]"
                 class="branching"
                 :style="{
-                  'width': `${Math.sqrt(((1.5 ** 2)+(1.5 * (branchingData?.count_branch - (branchingData?.index + 1))) ** 2))}rem`,
-                  'transform': `rotate(${}deg)`
+                  'width': `${branchingData ? calcTriangle(branchingData).width : null}rem`,
+                  'transform': `rotate(${branchingData ? calcTriangle(branchingData).rotate : null}deg)`
                 }"
               >
-                {{branchingData}}
               </div>
 
               <div class="commit w-3 h-3 bg-yellow-500 rounded-full"></div>
@@ -305,7 +316,6 @@ onMounted(() => {
   height: 2px;
   background: black;
   transform-origin: 0 0;
-  transform: rotate(45deg)
 }
 
 </style>
