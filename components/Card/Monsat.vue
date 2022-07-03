@@ -83,7 +83,7 @@ a.wrapper {
   transition: all .3s ease;
 }
 a.wrapper:hover {
-  background: black;
+  background: rgb(180, 180, 180);
 }
 
 a.wrapper:hover .img-wrapper {
@@ -97,11 +97,8 @@ a.wrapper:hover .glasses {
 
 @keyframes bang {
   0% {transform: scale(0.9)}
-  50% {transform: scale(1.2)}
+  50% {transform: scale(1.1)}
   100% {transform: scale(0.9)}
 }
 
-@keyframes kohji {
-
-}
 </style>
