@@ -19,13 +19,13 @@ const props = defineProps<Props>()
         <img class="w-12 h-12 object-cover rounded-full" :src="`https://github.com/${props.member.id}.png`" alt="">
       </div>
       <div>
-        <div class="text-lg text-slate-800 font-bold" v-html="props.member.displayname"></div>
-        <div class="text-sm text-slate-500" v-html="props.member.id"></div>
+        <div class="text-lg text-slate-800 font-bold">{{props.member.displayname}}</div>
+        <div class="text-sm text-slate-500">{{props.member.id}}</div>
       </div>
     </div>
 
     <div class="mt-6">
-      <p class="text-sm text-slate-700 leading-6" v-html="props.member.bio"></p>
+      <p class="text-sm text-slate-700 leading-6">{{props.member.bio}}</p>
     </div>
 
   </a>
