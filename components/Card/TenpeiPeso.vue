@@ -21,9 +21,9 @@ const props = defineProps<Props>()
             <img class="w-full drop-shadow-md" :src="`https://github.com/${props.member.id}.png`" alt="">
           </div>
           <div>
-            <div class="text-lg text-sky-900 font-bold" v-html="props.member.displayname"></div>
-            <div class="text-sm text-blue-300" v-html="props.member.id"></div>
-            <p class="mt-2 text-sm text-sky-900 leading-6" v-html="props.member.bio"></p>
+            <div class="text-lg text-sky-900 font-bold">{{props.member.displayname}}</div>
+            <div class="text-sm text-blue-300">{{props.member.id}}</div>
+            <p class="mt-2 text-sm text-sky-900 leading-6">{{props.member.bio}}</p>
           </div>
         </div>
       </div>

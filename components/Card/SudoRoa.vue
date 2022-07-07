@@ -22,8 +22,8 @@ const props = defineProps<Props>()
 
     <div class="absolute top-0 left-0 w-full h-full pl-12 pr-24 flex justify-center items-center">
       <div>
-        <div class="text-lg text-right text-gray-800 font-bold" v-html="props.member.displayname"></div>
-        <p class="mt-1 text-sm text-right text-gray-700 leading-6" v-html="props.member.bio"></p>
+        <div class="text-lg text-right text-gray-800 font-bold">{{props.member.displayname}}</div>
+        <p class="mt-1 text-sm text-right text-gray-700 leading-6">{{props.member.bio}}</p>
       </div>
     </div>
 
